@@ -1,0 +1,2 @@
+# Vagrant state directories anywhere in the repo.
+.vagrant/

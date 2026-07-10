@@ -1,0 +1,26 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/jammy64"
+
+  # Setup for the Master Node (Server)
+  config.vm.define "server" do |server|
+    server.vm.hostname = "flafiS"
+    
+    # Provider customization
+    server.vm.provider "virtualbox" do |vb|
+      vb.memory = "2048"  # Allocate 2GB RAM
+      vb.cpus = "2"       # Allocate 2 vCPUs
+    end
+  end
+
+  # Setup for the Worker Node (Agent)
+  config.vm.define "worker" do |worker|
+    worker.vm.hostname = "flafiSW"
+    
+    worker.vm.provider "virtualbox" do |vb|
+      vb.memory = "1536"  # Allocate 1.5GB RAM
+      vb.cpus = "1"       # Allocate 1 vCPU
+    end
+  end
+end
+
+#ansible
