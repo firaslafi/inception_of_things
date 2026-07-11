@@ -2,6 +2,9 @@
 
 set -e
 
+# change it to instsall => more elegant 
+#install -d -m 700 -o vagrant -g vagrant "$SSH_DIR"
+
 sudo -u vagrant mkdir -p /home/vagrant/.ssh
 chmod 700 /home/vagrant/.ssh
 

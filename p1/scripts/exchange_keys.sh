@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 
-# Generate SSH keys for both the server and worker nodes if they don't already exist
 SERVER_KEY=$(vagrant ssh server -c "cat ~/.ssh/id_ed25519.pub" | tr -d '\r')
 WORKER_KEY=$(vagrant ssh worker -c "cat ~/.ssh/id_ed25519.pub" | tr -d '\r')
 

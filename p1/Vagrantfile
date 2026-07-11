@@ -25,15 +25,17 @@ Vagrant.configure("2") do |config|
       vb.memory = "1536"  # Allocate 1.5GB RAM
       vb.cpus = "1"       # Allocate 1 vCPU
     end
-    worker.vm.provision "shell", path: "scripts/gen_ssh_key.sh"
-  end
 
-  # Runs after 'vagrant up'
-  config.trigger.after :up do |trigger|
-    trigger.name = "Exchange SSH keys"
-    trigger.run = {
-      path: "scripts/exchange_keys.sh"
-    }
+    worker.vm.provision "shell", path: "scripts/gen_ssh_key.sh"
+
+    worker.trigger.after :up do |trigger|
+      trigger.name = "Exchange SSH keys"
+      trigger.run = {
+        path: "scripts/exchange_keys.sh"
+      }
+    end
+  end
+  
 end
 
 #ansible
