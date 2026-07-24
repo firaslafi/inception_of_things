@@ -1,0 +1,29 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/jammy64"
+
+  # Setup for the Master Node (Server)
+  config.vm.define "server" do |server|
+    server.vm.hostname = "flafiS"
+    server.vm.network "private_network", ip: "192.168.56.110"
+    
+    # Provider customization
+    server.vm.provider "virtualbox" do |vb|
+      vb.name = "flafiS"
+      vb.memory = "2048"
+      vb.cpus = "2"
+    end
+
+  end
+
+  # === GLOBAL ANSIBLE PROVISIONER ===
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "confs/playbook.yaml"
+    ansible.compatibility_mode = "2.0"
+
+    # Map Vagrant VM defines to Ansible Groups (it happens automatically,
+    # but you can also do it explicitly renaming the groups)
+    ansible.groups = {
+      "k3s_server" => ["server"]
+    }
+  end
+end
